@@ -1,0 +1,249 @@
+{% extends 'base.html' %} {% load static %}
+<!-- s -->
+
+{% block content %}
+<!--  -->
+
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <!-- <div class="breadcrumbs" data-aos="fade-in">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Founded in 2020, {{ company }} specializes in linking students with the best qualified tutors. We strive to bring the classroom to the student rather than the student to the classroom
+            </p>
+        </div>
+    </div> -->
+    <div class="breadcrumbs" data-aos="fade-in">
+        <div class="container">
+            <h2>More About Us</h2>
+            <p>Founded in 2015, {{ company }} specializes in linking students with the best qualified tutors. We strive to bring the classroom to the student rather than the student to the classroom. Our method of delivery is exclusively online, leveraging
+                world class platform to make the learning process convenient. We serve high school students, Uni students and Professionals through our several partnerships to achieve their learning goals and self-acclimatize to be the best version of
+                themselves.
+            </p>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <!-- ======= About Section ======= -->
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row">
+                <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+                    <img src="{% static 'img/about.jpg' %}" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+                    <h3>What makes us different?</h3>
+                    <p class="fst-italic">
+                        Get all the benefits of a face-to-face tutor, online tutor, hybrid and more...
+                    </p>
+                    <ul>
+                        <li><i class="bi bi-check-circle"></i> Greater selection of tutors from around the country.</li>
+                        <li><i class="bi bi-check-circle"></i> Download your notes after the lesson.</li>
+                        <li><i class="bi bi-check-circle"></i> Get practice question and structured exams.</li>
+                        <li><i class="bi bi-check-circle"></i> No need to travel or host a tutor.</li>
+                        <li><i class="bi bi-check-circle"></i> Freedom and flexibility for both you and your tutor.</li>
+                        <li><i class="bi bi-check-circle"></i> You recieve regular report for constructive evaluation.</li>
+                        <li><i class="bi bi-check-circle"></i> Teach you tricks you won't get anyway.</li>
+                        <li><i class="bi bi-check-circle"></i> Flexibility in terms of tutorial schedules.</li>
+                    </ul>
+                    <p>
+                        You have the freedom to make this reccuring or change the mode of learning in the middle of the month but <b>T and Cs apply</b>
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- End About Section -->
+
+    <!-- End About Section -->
+    <!-- Start About Section -->
+    <section id="why-us" class="why-us">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row">
+                <div class="col-lg-4 d-flex align-items-stretch my-2">
+                    <div class="content">
+                        <h3>More About {{ company }}?</h3>
+                        <p>Our tutors are professionals in their field of expertise and are located across South Africa. We offer face to face tuts on bookings and have prerecorded learning material that the student can use at their convenience and of course
+                            learn at their own pace. We understand that a one size fits all approach to educating is outdated and through innovative methods make the learning experience be spoke for each learner as we know and understand that no two people
+                            are the same and there is always more than one way to skin a cat.
+                        </p>
+                        <div class="text-center">
+                            <a href="{% url 'pricing' %}" class="more-btn">Get a tutor <i class="bx bx-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-flex align-items-stretch my-2">
+                    <div class="content">
+                        <h3>{{ company }} App</h3>
+                        <p>We are currently in the process of developing our mobile app. This will be a learning platform accessible to the learner at the click of a button on their mobiles for high school learners, Uni students and Professionals alike.
+                            This platform will deliver the same offering as the web application and will have social chatting capabilities to enable learners to communicate with the peers and enjoy the convenient and communal learning environment.
+
+                        </p>
+                        <div class="text-center">
+                            <a href="{% url 'pricing' %}" class="more-btn">Get a tutor <i class="bx bx-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-flex align-items-stretch my-2">
+                    <div class="content">
+                        <h3>The Tutors
+                        </h3>
+                        <p>Our tutors come from diverse backgrounds and are situated across South Africa. From finance to engineering and the sciences our tutors not only offer guidance and tutelage but also mentor the learners as they walk the path to success
+
+                        </p>
+                        <div class="text-center">
+                            <a href="{% url 'pricing' %}" class="more-btn">Get a tutor <i class="bx bx-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- End About Section -->
+
+
+    <!-- ======= Counts Section ======= -->
+    <section id="counts" class="counts section-bg">
+        <div class="container">
+
+            <div class="row counters">
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-purecounter-start="0" data-purecounter-end="1232" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Students</p>
+                </div>
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-purecounter-start="0" data-purecounter-end="64" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Subjects/Modules</p>
+                </div>
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-purecounter-start="0" data-purecounter-end="42" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Events</p>
+                </div>
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Trainers</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- End Counts Section -->
+    {% comment %}
+
+    <section id="testimonials" class="testimonials">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Testimonials</h2>
+                <p>What are they saying</p>
+            </div>
+
+            <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">
+                        <div class="testimonial-wrap">
+                            <div class="testimonial-item">
+                                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                                <h3>Saul Goodman</h3>
+                                <h4>Ceo &amp; Founder</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i> Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam,
+                                    risus at semper.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End testimonial item -->
+
+                    <div class="swiper-slide">
+                        <div class="testimonial-wrap">
+                            <div class="testimonial-item">
+                                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                                <h3>Sara Wilsson</h3>
+                                <h4>Designer</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i> Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure
+                                    amet legam anim culpa.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End testimonial item -->
+
+                    <div class="swiper-slide">
+                        <div class="testimonial-wrap">
+                            <div class="testimonial-item">
+                                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+                                <h3>Jena Karlis</h3>
+                                <h4>Store Owner</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i> Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint
+                                    minim.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End testimonial item -->
+
+                    <div class="swiper-slide">
+                        <div class="testimonial-wrap">
+                            <div class="testimonial-item">
+                                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+                                <h3>Matt Brandon</h3>
+                                <h4>Freelancer</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i> Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem
+                                    dolore labore illum veniam.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End testimonial item -->
+
+                    <div class="swiper-slide">
+                        <div class="testimonial-wrap">
+                            <div class="testimonial-item">
+                                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+                                <h3>John Larson</h3>
+                                <h4>Entrepreneur</h4>
+                                <p>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i> Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse
+                                    veniam culpa fore nisi cillum quid.
+                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End testimonial item -->
+
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+
+        </div>
+    </section>
+    {% endcomment %}
+    <!-- End Testimonials Section -->
+
+</main>
+<!-- End #main -->
+
+{% endblock content %}

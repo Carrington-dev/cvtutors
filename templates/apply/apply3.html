@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+<!-- load -->
+{% load static %}
+<!-- block -->
+{% block content %}
+<!--  -->
+{% load cart_tags %}
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+        <div class="container">
+            <h2>Pricing</h2>
+            <p>Our list of tutor booking prices or rates listed below add to cart to book for your next tutor</p>
+
+            <p>Your order number is {{order_number}}, choose the best plan now and continue to pay.</p>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row">
+                {% comment %}
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="box">
+                        <h3>Free</h3>
+                        <h4><sup>$</sup>0<span> / month</span></h4>
+                        <ul>
+                            <li>Aida dere</li>
+                            <li>Nec feugiat nisl</li>
+                            <li>Nulla at volutpat dola</li>
+                            <li class="na">Pharetra massa</li>
+                            <li class="na">Massa ultricies mi</li>
+                        </ul>
+                        <div class="btn-wrap">
+                            <a href="#" class="btn-buy">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
+                    <div class="box featured">
+                        <h3>Business</h3>
+                        <h4><sup>$</sup>19<span> / month</span></h4>
+                        <ul>
+                            <li>Aida dere</li>
+                            <li>Nec feugiat nisl</li>
+                            <li>Nulla at volutpat dola</li>
+                            <li>Pharetra massa</li>
+                            <li class="na">Massa ultricies mi</li>
+                        </ul>
+                        <div class="btn-wrap">
+                            <a href="#" class="btn-buy">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
+                    <div class="box">
+                        <h3>Developer</h3>
+                        <h4><sup>$</sup>29<span> / month</span></h4>
+                        <ul>
+                            <li>Aida dere</li>
+                            <li>Nec feugiat nisl</li>
+                            <li>Nulla at volutpat dola</li>
+                            <li>Pharetra massa</li>
+                            <li>Massa ultricies mi</li>
+                        </ul>
+                        <div class="btn-wrap">
+                            <a href="#" class="btn-buy">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+                {% endcomment %}
+
+                <!--  -->
+                {% if products %} {% for product in products %}
+                <!-- <div class="col-lg-3 col-md-6 mt-4 mt-lg-0"> -->
+                <!-- <div class="box">
+                        <h3>{{product.name}}</h3>
+                        <h4><sup>ZAR</sup>{{product.price}}<span> / hour</span></h4>
+                        <ul>
+                            <li>Aida dere</li>
+                            <li>Nec feugiat nisl</li>
+                            <li>Nulla at volutpat dola</li>
+                            <li>Pharetra massa</li>
+                            <li>Massa ultricies mi</li>
+                        </ul>
+                        <div class="btn-wrap">
+                            <a href="#" class="btn-buy">Buy Now</a>
+                        </div>
+                    </div> -->
+                <!-- </div> -->
+
+
+                <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
+                    <div class="box">
+                        {% if product.is_advanced %}
+                        <span class="advanced">Advanced</span> {% else %}
+
+                        <span class="advanced">Starter</span> {% endif %}
+
+                        <h3>{{product.name}}</h3>
+                        <h4><sup>R</sup>{{product.price}}<span> / {{product.per}}</span></h4>
+                        <ul>
+                            <!-- <li>Aida dere</li>
+                            <li>Nec feugiat nisl</li>
+                            <li>Nulla at volutpat dola</li>
+                            <li>Pharetra massa</li>
+                            <li>Massa ultricies mi</li> -->
+                            {% show_features product.id %}
+                        </ul>
+                        <div class="btn-wrap">
+                            <a href="{% url 'add_cart' product.id %}" class="btn-buy">Book tutor</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!--  -->
+                {% else %}
+                <p class="text-center">There are no products at the moment</p>
+                {% endif %}
+
+
+            </div>
+
+        </div>
+    </section>
+    <!-- End Pricing Section -->
+
+</main>
+<!-- End #main -->
+
+{% endblock content %}

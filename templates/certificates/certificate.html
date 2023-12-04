@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate</title>
+    <link rel="stylesheet" href="{% static 'css/certificate.css' %}" />
+    <style>
+        .badge {
+            width: 40mm;
+            height: 40mm;
+            position: absolute;
+            right: 10mm;
+            bottom: 10mm;
+            background-image: url("http://127.0.0.1:8000/static/img/badge.svg");
+            /*
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z' /%3E%3C/svg%3E");
+        /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z' /%3E%3C/svg%3E"); */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="border-pattern">
+        <div class="content">
+            <div class="inner-content">
+                <h1>Certificate</h1>
+                <h2>of Excellence</h2>
+                <h3>This Certificate Is Proudly Presented To</h3>
+                <p>{{user.first_name}} {{user.last_name}}</p>
+                <h3>Has Completed</h3>
+                <p>{{course.name}}</p>
+                <h3>On</h3>
+                <p>{{date|date:"F d, Y"}}</p>
+                <!-- <p>Feburary 5, 2021</p> -->
+                <div class="background-image: url('file://static/img/badge.svg');">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

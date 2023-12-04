@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">
+</script>
+
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css" />
+<!--  -->
+{% endblock scripts %}
+<!--  -->
+{% block content %}
+<!--  -->
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+        <div class="container">
+            <h2>Getting Started</h2>
+            <p>You are about to make your first order </p>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+
+
+
+
+        <div class="container" data-aos="fade-up">
+
+            <div class="row mt-5">
+
+
+                <div class="col-lg-2">
+
+                </div>
+                <div class="col-lg-8 mt-5 mt-lg-0">
+
+                    <form action="{% url 'apply2' %}" method="post" role="form" enctype="multipart/form-data" class="php-email-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                {{form.city}}
+                                <!-- <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required> -->
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                {{form.street_name}}
+                                <!-- <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required> -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                {{form.type_of_class}}
+                                <!-- <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required> -->
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                {{form.zip_code}}
+                                <!-- <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required> -->
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <!-- {{form.last_name}} -->
+                            <!-- <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required> -->
+                        </div>
+                        <div class="form-group mt-3">
+                            <!-- {{form.country}} -->
+                            <!-- <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea> -->
+                        </div>
+
+                        {% if messages %}
+
+
+                        <div class="my-3">
+                            <div class="loading">Loading</div>
+                            <div class="error-message"></div>
+                            {% for message in messages %}
+                            <div class="sent-message">Your message has been sent. Thank you!</div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="text-center"><button type="submit">Next</button></div>
+                    </form>
+
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- End Contact Section -->
+
+</main>
+<!-- End #main -->
+{% block jstags %}
+<!--  -->
+<script>
+    $(function() {
+        // var availableTags = [
+        //     `{% for t in cities %}"{{t}}",{% endfor %}`
+        //     // "technology", "science",
+        // ];
+        var availableTags = ["Johannesburg", "Louis Trichardt", "Messina", "Vereeniging", "Pietermaritzburg", "Pretoria", "Durban", "Cape Town", "Welkom", "East London", "Randburg", "Roodepoort", "Port Elizabeth", "Bloemfontein", "Centurion", "Springs", "Sandton", "Polokwane", "Klerksdorp", "Rustenburg", "Kimberley", "Bhisho", "Benoni", "George", "Middelburg", "Vryheid", "Potchefstroom", "Umtata", "Brits", "Alberton", "Upington", "Paarl", "Queenstown", "Mmabatho", "Kroonstad", "Uitenhage", "Bethal", "Worcester", "Vanderbijlpark", "Grahamstown", "Standerton", "Brakpan", "Thohoyandou", "Saldanha", "Tzaneen", "Graaff-Reinet", "Oudtshoorn", "Mossel Bay", "Port Shepstone", "Knysna", "Vryburg", "Ladysmith", "Kuilsrivier", "Beaufort West", "Aliwal North", "Volksrust", "Musina", "Vredenburg", "Malmesbury", "Lebowakgomo", "Cradock", "De Aar", "Ulundi", "Jeffrey's Bay", "Lichtenburg", "Hermanus", "Carletonville", "Mahikeng", "Nelspruit"];
+        // $("#city_in").autocomplete({
+        //     // source: "{% url 'cities_json' %}"
+        //     source: availableTags
+        // });
+        $(function() {
+            $("#city_in").autocomplete({
+                // source: "{% url 'cities_json' %}",
+                // minLength: 1,
+                source: availableTags
+            });
+        });
+    });
+    $(function() {
+        // var availableTags = [
+        //     `{% for t in cities %}"{{t}}",{% endfor %}`
+        //     // "technology", "science",
+        // ];
+        const api_url = "{% url 'subject-list' %}";
+        var availableSubjects = [];
+        // Defining async function
+        async function getapi(url) {
+
+            // Storing response
+            const response = await fetch(url);
+
+            // Storing data in form of JSON
+            var data = await response.json();
+            // console.log(data);
+            if (response) {
+                // hideloader();
+                // alert(`Hello ${data[0].id}`);
+                // console.log(data[0].id);
+                // alert(data.length);
+                for (var i = 0; i < data.length; i++) {
+                    availableSubjects.push(data[i].name);
+                }
+            }
+            // console.log(availableSubjects);
+            // show(data);
+        }
+        // Calling that async function
+        getapi(api_url);
+        var availableTags = availableSubjects;
+        // var availableTags = ["English", "Math", "Art", "Science", "History", "Music", "Calculas", "Geography", "P.E (Physical Education)", "Drama", "Biology", "Chemistry", "Physics", "I.T (Information Technology)", "Foreign languages", "Focial studies", "Technology", "Philosophy", "Graphic design", "Literature", "Algebra", "Geometry", "Law", "Electrical Engineering", "Other"];
+        // var availableTags = ["Johannesburg", "Louis Trichardt", "Messina", "Vereeniging", "Pietermaritzburg", "Pretoria", "Durban", "Cape Town", "Welkom", "East London", "Randburg", "Roodepoort", "Port Elizabeth", "Bloemfontein", "Centurion", "Springs", "Sandton", "Polokwane", "Klerksdorp", "Rustenburg", "Kimberley", "Bhisho", "Benoni", "George", "Middelburg", "Vryheid", "Potchefstroom", "Umtata", "Brits", "Alberton", "Upington", "Paarl", "Queenstown", "Mmabatho", "Kroonstad", "Uitenhage", "Bethal", "Worcester", "Vanderbijlpark", "Grahamstown", "Standerton", "Brakpan", "Thohoyandou", "Saldanha", "Tzaneen", "Graaff-Reinet", "Oudtshoorn", "Mossel Bay", "Port Shepstone", "Knysna", "Vryburg", "Ladysmith", "Kuilsrivier", "Beaufort West", "Aliwal North", "Volksrust", "Musina", "Vredenburg", "Malmesbury", "Lebowakgomo", "Cradock", "De Aar", "Ulundi", "Jeffrey's Bay", "Lichtenburg", "Hermanus", "Carletonville", "Mahikeng", "Nelspruit"];
+        // $("#city_in").autocomplete({
+        //     // source: "{% url 'cities_json' %}"
+        //     source: availableTags
+        // });
+        $(function() {
+            $("#subject").autocomplete({
+                // source: "{% url 'cities_json' %}",
+                // minLength: 1,
+                source: availableTags
+            });
+        });
+    });
+</script>
+{% endblock jstags %}
+<!--  -->
+{% endblock content %}
+
+<!-- 
+["English", "Math", "Art", "Science", "History", "Music", "Geography", "P.E (Physical Education)", "Drama", "Biology", "Chemistry", "Physics", "I.T (Information Technology)", "Foreign languages", "Focial studies", "Technology", "Philosophy", "Graphic design", "Literature", "Algebra", "Geometry",]
+ -->

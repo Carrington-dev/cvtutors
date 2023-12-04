@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% block content %}
+
+
+<main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+        <div class="container">
+            <h2>Payment</h2>
+            <p>You are about to pay a total of R {{ total }}</p>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <!-- ======= Pricing Section ======= -->
+
+
+
+    <section id="pricing" class="pricing">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row">
+
+                <div class="col-lg-3 col-md-6">
+                    <!-- <div class="box">
+                        <h3>Free</h3>
+                        <h4><sup>$</sup>0<span> / month</span></h4>
+                        <ul>
+                            <li>Aida dere</li>
+                            <li>Nec feugiat nisl</li>
+                            <li>Nulla at volutpat dola</li>
+                            <li class="na">Pharetra massa</li>
+                            <li class="na">Massa ultricies mi</li>
+                        </ul>
+                        <div class="btn-wrap">
+                            <a href="#" class="btn-buy">Buy Now</a>
+                        </div>
+                    </div> -->
+                </div>
+
+
+
+                <div class="col-lg-6 col-md-6 mt-4 mt-lg-0">
+                    <div class="box">
+                        <h3>Pay Now</h3>
+                        <h4><sup>R</sup>{{ total }}<span> / cash</span></h4>
+                        <ul>
+                            <li>Secure payment</li>
+                            <li>No hidden fees</li>
+                            <li>No account hacking</li>
+                            <li>Be sure to come back</li>
+                            <li>Instant activation of courses</li>
+                            <li>Ref No: {{ order.order_number }}</li>
+                        </ul>
+                        <div class="btn-wrap">
+                            <form action="{{ action }}" method="post">
+                                <input type="hidden" name="merchant_id" value="{{ payfast_merchant_id }}">
+                                <input type="hidden" name="merchant_key" value="{{ payfast_merchant_key }}">
+                                <input type="hidden" name="amount" value="{{ total }}">
+                                <input type="hidden" name="item_name" value="{{ order.order_number }}">
+
+                                <input type="hidden" name="return_url" value="https://b145-196-21-43-5.ngrok-free.app/pay/before">
+                                <input type="hidden" name="cancel_url" value="https://b145-196-21-43-5.ngrok-free.app/pay/canceled">
+                                <!-- <input type="hidden" name="return_url" value="{% url 'done' %}">
+                                <input type="hidden" name="cancel_url" value="{% url 'canceled' %}"> -->
+                                <!-- <input type="hidden" name="notify_url" value="https://8344-197-185-108-71.ngrok-free.app/pay/notify/"> -->
+
+                                <input class="btn-buy" type="submit">
+                            </form>
+                            <!-- <a href="#" class="btn-buy">Buy Now</a> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
+                    <!-- <div class="box">
+                        <span class="advanced">Advanced</span>
+                        <h3>Ultimate</h3>
+                        <h4><sup>$</sup>49<span> / month</span></h4>
+                        <ul>
+                            <li>Aida dere</li>
+                            <li>Nec feugiat nisl</li>
+                            <li>Nulla at volutpat dola</li>
+                            <li>Pharetra massa</li>
+                            <li>Massa ultricies mi</li>
+                        </ul>
+                        <div class="btn-wrap">
+                            <a href="#" class="btn-buy">Buy Now</a>
+                        </div>
+                    </div> -->
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </section>
+    <!-- End Pricing Section -->
+
+</main>
+<!-- End #main -->
+{% endblock content %}
+<!--  -->

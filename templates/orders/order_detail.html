@@ -1,0 +1,284 @@
+{% extends 'base.html' %} {% load static %}{% load humanize %} {% block content %} {% comment %}
+
+<style>
+    #my_track {
+        margin: 10px;
+        padding: 0px;
+        /* border: 2px solid #0088CC; */
+        color: #0088CC;
+        border-radius: 10px;
+    }
+    
+    #my_track_details {
+        margin: 0px;
+        padding: 0px;
+        /* border: 2px solid #0088CC; */
+        color: #f2762e;
+        border-radius: 10px;
+    }
+</style>
+
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bread-inner">
+                    <ul class="bread-list">
+                        <li><a href="{% url 'home' %}">Home<i class="ti-arrow-right"></i></a></li>
+                        <!-- <li class="active"><a href="{% url 'home' %}">Checkout</a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Breadcrumbs -->
+
+<!-- Start Checkout -->
+<section class="shop checkout section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-12">
+                <div class="order-details">
+                    <!-- Order Widget -->
+                    <div class="single-widget">
+                        <h2>MY ORDERS</h2>
+                        <div class="content">
+                            <ul>
+
+                                <li class="last active">
+
+                                    <p class="quantity">Dashboard</span>
+                                    </p>
+                                </li>
+                                <li class="last active">
+                                    <a href="{% url 'my_customer_orders' %}">
+                                        <p class="quantity">My Orders</span>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="last active">
+                                    <a href="{% url 'profile' %}">
+                                        <p class="quantity">Edit Profile</span>
+                                        </p>
+                                    </a>
+
+                                </li>
+                                <li class="last">
+                                    <a href="{% url 'password_change' %}">
+                                        <p class="quantity">Change Password</span>
+                                        </p>
+                                    </a>
+
+                                </li>
+                                <li class="last">
+
+                                    <p class="quantity">Returned Orders</span>
+                                    </p>
+                                </li>
+                                <li class="last">
+
+                                    <p class="quantity">Refunds</span>
+                                    </p>
+                                </li>
+
+
+                                <li class="last"></li>
+                            </ul>
+                            <ul>
+
+                                <li class="last"><a class="btn" href="{% url 'logout' %}">Sign Out</a></li>
+
+
+
+                            </ul>
+                        </div>
+                    </div>
+                    <!--/ End Order Widget -->
+
+
+                    <!--/ End Button Widget -->
+                </div>
+            </div>
+            <div class="col-lg-8 col-12">
+                <div class="checkout-form">
+                    <h2>Order Number: {{order.order_number}}</h2>
+
+                    <p> Order Date: 16 December 2018</p>
+                    <!-- Form -->
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th width="480">Delivered to:</th>
+                                        <th width="480">Payment method:</th>
+                                    </tr>
+                                    <tr>
+
+                                        <td width="480">
+                                            {{order.first_name}} {{order.last_name}}<br> Email: {{order.email}}<br> Phone: {{order.phone}}<br>
+
+                                            <var class="price text-muted"> {{order.get_address}}</var>
+                                        </td>
+                                        <td width="480"> Mastercard
+                                            <br> Sub Total: R {{order.get_sub_total|intcomma}}
+                                            <br> Tax: R {{order.tax|intcomma}}
+                                            <br>
+                                            <var class="price text-muted">Total: R {{order.order_total|intcomma}}</var>
+
+
+
+                                        </td>
+                                    </tr>
+
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    {% for order_item in order.order_items.all %}
+                                    <tr>
+                                        <td width="100">
+                                            <img src="{{order_item.product.thumbnail_image.url}}" class="img-xs border">
+                                        </td>
+                                        <td width="200">
+                                            {{order_item.product.product_name}}<br>
+                                            <!-- <p class="title mb-0">{{order.order_number}} </p> -->
+                                            <var class="price text-muted">ZAR {{order_item.product.price}}</var>
+                                        </td>
+                                        <td width="250"> Seller Oftmart
+                                            <br>
+                                            <small>{{order_item.created_at}}</small>
+                                        </td>
+                                        <td width="250"> <a href="#" id="my_track">{{order_item.quantity}} items</a>
+                                            <a href="{% url 'my_customer_order' order.id %}" id="my_track_details">View Details </a> </td>
+                                    </tr>
+                                    {% endfor %}
+
+
+
+                                </table>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                </div>
+                <!-- </form> -->
+                <!--/ End Form -->
+            </div>
+        </div>
+
+    </div>
+    </div>
+</section>
+<!--/ End Checkout -->
+{% endcomment %}
+
+<section class="h-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-10 col-xl-8">
+                <div class="card" style="border-radius: 10px;">
+                    <div class="card-header px-4 py-5">
+                        <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #f2762e;">{{order.first_name}} {{order.last_name}}</span>!</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <p class="lead fw-normal mb-0">
+                                <a style="color: #f2762e;" href="{% url 'admin_order_detail' order.id %}">Receipt</a>
+                            </p>
+                            <p class="small text-muted mb-0">Receipt Voucher : {{order.order_number}}</p>
+                            <!-- <p class="small text-muted mb-0">Receipt Voucher : 1KAU9-84UIL</p> -->
+                        </div>
+
+                        {% for order_item in order.order_items.all %}
+
+                        <div class="card shadow-0 border mb-4">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img src="{% static 'img/logo.png' %}" class="img-fluid" alt="Phone">
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                        <p class="text-muted mb-0">{{order_item.order.type_of_class.name}}</p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                        <p class="text-muted mb-0 small">{{order.learning_method}}</p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                        <p class="text-muted mb-0 small">Time: {{order_item.quantity}}-{{order_item.product.per}}(s)</p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                        <p class="text-muted mb-0 small">Qty: {{order_item.quantity}}</p>
+                                    </div>
+                                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                        <p class="text-muted mb-0 small">ZAR{{order_item.product.price}}</p>
+                                    </div>
+                                </div>
+                                <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                                <div class="row d-flex align-items-center">
+                                    <div class="col-md-2">
+                                        <p class="text-muted mb-0 small">Track Order</p>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="progress" style="height: 6px; border-radius: 16px;">
+                                            <div class="progress-bar" role="progressbar" style="width: 100%; border-radius: 16px; background-color: #43bdec;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="d-flex justify-content-around mb-1">
+                                            <p class="text-muted mt-1 mb-0 small ms-xl-5">{{order.delivery_status}}</p>
+                                            <p class="text-muted mt-1 mb-0 small ms-xl-5">{{order.status}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+
+
+                        <div class="d-flex justify-content-between pt-2">
+                            <p class="fw-bold mb-0">Order Details</p>
+                            <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> ZAR{{order.order_total}}</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between pt-2">
+                            <p class="text-muted mb-0">Invoice Number : {{order.order_number}}</p>
+                            <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span> ZAR00.00</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <p class="text-muted mb-0">Invoice Date : {{order.date_ordered|date:"d, F Y"}}</p>
+                            <p class="text-muted mb-0"><span class="fw-bold me-4">GST 18%</span> 123</p>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-5">
+                            <p class="text-muted mb-0">Recepits Voucher : 18KU-62IIK</p>
+                            <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> Free</p>
+                        </div>
+                    </div>
+                    <div class="card-footer border-0 px-4 py-5" style="background-color: #f2762e; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                        <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total paid: <span class="h2 mb-0 ms-2">ZAR {{order.order_total}}</span></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

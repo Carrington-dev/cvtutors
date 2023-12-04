@@ -1,0 +1,14 @@
+ {% if present or absent %} {% for p in present %}
+<li>{{p.name}}</li>
+{% endfor %}
+
+<!--  -->
+{% for ab in absent %}
+<li class="na">{{ab.name}}</li>
+{% endfor %}
+
+<!--  -->
+{% else %}
+<li>There are no features at the moment</li>
+<!--  -->
+{% endif %}

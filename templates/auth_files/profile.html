@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% block content %}
+<!--  -->
+{% load crispy_forms_tags %}
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+        <div class="container">
+            <h2>Profile</h2>
+            <p>Have a look at your profile </p>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+        <!-- <div data-aos="fade-up">
+            <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
+                frameborder="0" allowfullscreen></iframe>
+        </div> -->
+
+        <div class="container" data-aos="fade-up">
+
+            <div class="row mt-5">
+
+                <div class="col-lg-4">
+                    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+                        <a href="{% url 'home' %}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                            <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                            <span class="fs-4">MyTuta</span>
+                        </a>
+                        <hr>
+                        <ul class="nav nav-pills flex-column mb-auto">
+                            <li class="nav-item">
+                                <a href="{% url 'home' %}" class="nav-link active" aria-current="page">
+                                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg> Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'likes' %}" class="nav-link link-dark">
+                                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg> Wishlist
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'my_courses' %}" class="nav-link link-dark">
+                                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg> My Courses
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'my_customer_orders' %}" class="nav-link link-dark">
+                                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg> Orders
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'courses' %}" class="nav-link link-dark">
+                                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg> My Products
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link link-dark">
+                                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg> Customers
+                                </a>
+                            </li>
+                        </ul>
+                        <hr>
+                        <div class="dropdown">
+                            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                                <strong>{{request.user.username}}</strong>
+                            </a>
+                            <ul class="dropdown-menu text-small shadow">
+                                <li><a class="dropdown-item" href="{% url 'contact' %}">Contact us...</a></li>
+                                <li><a class="dropdown-item" href="{% url 'courses' %}">My Courses</a></li>
+                                <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'profile_pic' %}">Update profile picture</a></li>
+                                <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">Sign out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="b-example-divider b-example-vr"></div>
+
+                </div>
+
+                <div class="col-lg-8 mt-5 mt-lg-0">
+
+                    <form action="{% url 'profile' %}" method="post" role="form" class="php-email-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-8 form-group">
+                                <!--  -->
+                                {{form}}
+                                <!-- <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required> -->
+                            </div>
+
+                        </div>
+
+                        <div class="my-3">
+                            <div class="loading">Loading</div>
+                            <div class="error-message"></div>
+                            <div class="sent-message">Your message has been sent. Thank you!</div>
+                        </div>
+                        <div class="text-center"><button type="submit">Update</button></div>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- End Contact Section -->
+
+</main>
+<!-- End #main -->
+
+{% endblock content %}

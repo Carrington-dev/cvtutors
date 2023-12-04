@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+{% load humanize %} {% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <meta name="description" content="Invoice demo sample">
+    <meta name="author" content="Kozea">
+    <!-- <link href="{% static 'orders/invoice.css' %}" media="print" rel="stylesheet">  -->
+    {% if title %}
+    <title>MyTuta - {{title}}</title>
+    {% else %}
+    <title>Invoice</title>
+    {% endif %}
+
+
+
+</head>
+
+<body>
+    <h1>Invoice</h1>
+
+    <aside>
+        <address id="from">
+        395 Francis Baard Street
+        Arcadia, 0002, Pretoria Central
+        Pretoria, 0001, Gauteng
+        South Africa
+      </address>
+
+        <address id="to">
+        {{order.street_name}}
+        {{order.city}} {{order.zip_code}}
+        {{order.country}}
+      </address>
+    </aside>
+
+    <dl id="informations">
+        <dt>Invoice number</dt>
+        <dd>#{{order.order_number}}</dd>
+        <dt>Date</dt>
+        <dd>{{order.date_ordered|date:"D, d M Y"}}</dd>
+    </dl>
+
+    <table>
+        <thead>
+            <th>Description</th>
+            <th>Price</th>
+            <th id="quantity">Quantity</th>
+            <th>Subtotal</th>
+        </thead>
+        <tbody>
+            {% for order_item in order.order_items.all %}
+            <tr>
+                <td>{{order_item.product.name|truncatechars:33}}</td>
+                <td>R {{order_item.product.price|intcomma}}</td>
+                <td>{{order_item.quantity}}-{{order_item.product.per}}(s)</td>
+                <td>R {{order_item.get_sub_total|intcomma}}</td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table id="total">
+        <thead>
+            <th>Paid on</th>
+            <!-- <th>Account number</th> -->
+            <th>Payment Method</th>
+            <th>Total Paid</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{order.date_ordered|date:"M d, Y"}}</td>
+                <!-- <td>132 456 789 012</td> -->
+                <td>{{order.payment.payment_method}}</td>
+
+                {% if order.payment.payment_method == 'PayFast' %}
+                <td>{{order.currency}} {{order.order_total|intcomma}}</td>
+
+                {% else %}
+                <td>{{order.currency}} {{order.order_total_other|intcomma}}</td>
+                {% endif %}
+
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

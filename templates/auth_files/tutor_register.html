@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% block content %}
+<!--  -->
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+        <div class="container">
+            <h2>Getting Started</h2>
+            <p>You are about to register as a tutor </p>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+    {% if form.errors %}
+
+    <div class="container">
+        <!-- {% for error in form.errors %} -->
+        <div class="alert">
+
+
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> {{form.errors}}
+
+        </div>
+        <!-- {% endfor %} -->
+    </div>
+    {% endif %} {% if p_form.errors %}
+
+    <div class="container">
+        <div class="alert">
+
+
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> {{p_form.errors}}
+
+        </div>
+    </div>
+    {% endif %}
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+
+
+
+
+        <div class="container" data-aos="fade-up">
+
+            <div class="row mt-5">
+
+
+
+
+                <div class="col-lg-4">
+
+                </div>
+                <div class="col-lg-4 mt-5 mt-lg-0">
+
+                    <form action="{% url 'tutor_register' %}" method="post" role="form" enctype="multipart/form-data" class="php-email-form">
+                        {% csrf_token %}
+
+                        <div class="row">
+
+                            {% for field in form %}
+
+                            <div class="col-md-6 form-group">
+                                {{field}}
+                                <!-- <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required> -->
+                            </div>
+                            {% endfor %}
+
+
+                        </div>
+
+
+                        <div class="form-group mt-3">
+                            <label for="{{p_form.image.id}}">Profile Picture**</label>
+                            <br> {{p_form.image}}
+                            <!-- {{form.last_name}} -->
+                            <!-- <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required> -->
+                        </div>
+                        <div class="form-group mt-3">
+                            {{p_form.bio}}
+                            <!-- {{form.country}} -->
+                            <!-- <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea> -->
+                        </div>
+
+                        <!--  -->
+                        {% if messages %}
+
+
+                        <div class="my-3">
+                            <div class="loading">Loading</div>
+                            <div class="error-message"></div>
+                            {% for message in messages %}
+                            <div class="sent-message">Your message has been sent. Thank you!</div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <div class="text-center"><button type="submit">Submit Application</button></div>
+                    </form>
+
+                </div>
+                <div class="col-lg-4">
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- End Contact Section -->
+
+</main>
+<!-- End #main -->
+
+{% endblock content %}

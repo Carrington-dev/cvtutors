@@ -1,0 +1,82 @@
+{% load static %} {% if is_enrolled %}
+<!--  -->
+<!-- <p class="price">Go to price</p> -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4>{{course.category.name}}</h4>
+    <!-- <p class="price">ZAR {{course.price}}</p> -->
+    <div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:{{progress}}%">
+            {{progress}}% Complete (success)
+        </div>
+    </div>
+</div>
+
+<h3><a href="{% url 'course-mk' course.id %}">{{course.name|truncatechars:"30"}}</a></h3>
+<p>{{course.describe|truncatechars:"200"}}</p>
+<div class="trainer d-flex justify-content-between align-items-center">
+    <div class="trainer-profile d-flex align-items-center">
+        <img src="{{course.image.url}}" class="img-fluid" alt="">
+        <!-- <img src="{% static 'img/trainers/trainer-1.jpg' %}" class="img-fluid" alt=""> -->
+        <span>{{course.trainer.first_name|truncatechars:"15"}}</span>
+    </div>
+    <div class="trainer-rank d-flex align-items-center">
+
+        {% if course.trainer == request.user %}
+
+        <a href="{% url 'worker_admin:index' %}">
+
+            <i class="bx bx-edit"></i>&nbsp;Edit &nbsp;&nbsp;
+        </a>
+        {% endif %}
+
+        <i class="bx bx-user"></i>&nbsp;{{course.joins}} &nbsp;&nbsp;
+        <a href="{% url 'like_course' course.pk %}">
+            {% if course in request.user.likes.all %}
+              
+            <i class="bi bi-heart-fill"></i>&nbsp;{{course.likes}}
+            {% else %}
+            <i class="bx bx-heart"></i>&nbsp;{{course.likes}}
+            {% endif %}
+        </a>
+    </div>
+</div>
+{% else %}
+<!--  -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4>{{course.category.name}}</h4>
+    <p class="price">ZAR {{course.price}}</p>
+</div>
+
+<h3><a href="{% url 'course-mk' course.id %}">{{course.name|truncatechars:"30"}}</a></h3>
+<p>{{course.describe|truncatechars:"200"}}</p>
+<div class="trainer d-flex justify-content-between align-items-center">
+    <div class="trainer-profile d-flex align-items-center">
+        <img src="{{course.image.url}}" class="img-fluid" alt="">
+        <!-- <img src="{% static 'img/trainers/trainer-1.jpg' %}" class="img-fluid" alt=""> -->
+        <span>{{course.trainer.first_name|truncatechars:"15"}}</span>
+    </div>
+    <div class="trainer-rank d-flex align-items-center">
+
+        {% if course.trainer == request.user %}
+
+        <a href="{% url 'worker_admin:index' %}">
+
+            <i class="bx bx-edit"></i>&nbsp;Edit &nbsp;&nbsp;
+        </a>
+        {% endif %}
+
+        <i class="bx bx-user"></i>&nbsp;{{course.joins}} &nbsp;&nbsp;
+        <!-- <i class="bx bx-heart"></i>&nbsp;{{course.likes}} -->
+        <a href="{% url 'like_course' course.pk %}">
+            {% if course in request.user.likes.all %}
+              
+            <i class="bi bi-heart-fill"></i>&nbsp;{{course.likes}}
+            {% else %}
+            <i class="bx bx-heart"></i>&nbsp;{{course.likes}}
+            {% endif %}
+
+            <!-- <i class="bi bi-heart"></i>&nbsp;{{course.likes}} -->
+        </a>
+    </div>
+</div>
+{% endif %}

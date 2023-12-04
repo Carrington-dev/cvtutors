@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load my_auth_tags %}
+<!--  -->
+{% load static %}
+<!--  -->
+
+<head>
+    <meta charset="utf-8">
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!--  -->
+    {% if title%}
+    <title>{{title}}</title>
+    {% else %}
+    <title>MyTuta</title>
+    {% endif %}
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'img/favicon.png' %}" rel="icon">
+    <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <script src="https://js.yoco.com/sdk/v1/yoco-sdk-web.js"></script>
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css">
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <!-- =======================================================
+  * Template Name: Education - v4.8.1
+  * Template URL: https://stemgon.co.za/
+  * Author: stemgon.co.za
+  * License: https://stemgon.co.za/license/
+  ======================================================== -->
+    <style>
+        #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
+        
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        
+        @-webkit-keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+        
+        @-webkit-keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+    </style>
+    <!--  -->
+    <style>
+        /* The alert message box */
+        
+        .alert {
+            padding: 20px;
+            background-color: #f44336;
+            /* Red */
+            color: white;
+            margin-bottom: 15px;
+        }
+        /* The close button */
+        
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        /* When moving the mouse over the close button */
+        
+        .closebtn:hover {
+            color: black;
+        }
+    </style>
+
+    {% block scripts %}
+    <!--  -->
+    {% endblock scripts %}
+    <script src="https://www.paypal.com/sdk/js?client-id=AXVxPeHj-3PHcYZ5Z2hWwZTTayXQw1ERz_J4_j7rkEYV7vGM3Io95AFi-91oZQDjkzYHwCdor17Tezq4&currency=USD"></script>
+    <!-- Set up a container element for the button -->
+
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+            <!-- <h1 class="logo me-auto"><a href="{% url 'home' %}">MyTuta</a></h1> -->
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <a href="{% url 'home' %}" class="logo me-auto"><img src="{% static 'img/logo.png' %}" alt="" class="img-fluid"></a>
+
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                    <li><a class="active" href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'courses' %}">Courses</a></li>
+                    <li><a href="{% url 'tutors' %}">Tutas</a></li>
+                    <!-- <li><a href="{% url 'home' %}">Events</a></li> -->
+                    <li><a href="{% url 'pricing' %}">Pricing</a></li>
+
+                    {% if user.is_authenticated %}
+
+                    <!-- <li><a href="{% url 'logout' %}">Sign Out</a></li> -->
+
+                    <li class="dropdown"><a><span>More</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="{% url 'logout' %}">Sign Out</a></li>
+
+                            <li><a href="{% url 'profile' %}">Profile</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+
+                    <!-- <li><a>Sign Up</a></li> -->
+                    <li class="dropdown"><a href="#"><span>Sign Up</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="{% url 'register' %}">As a student</a></li>
+
+                            <li><a href="{% url 'tutor_register' %}">As a tutor</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{% url 'login' %}">Sign In</a></li>
+                    {% endif %} {% comment %}
+                    <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#">Drop Down 1</a></li>
+                            <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
+                                        class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="#">Deep Drop Down 1</a></li>
+                                    <li><a href="#">Deep Drop Down 2</a></li>
+                                    <li><a href="#">Deep Drop Down 3</a></li>
+                                    <li><a href="#">Deep Drop Down 4</a></li>
+                                    <li><a href="#">Deep Drop Down 5</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Drop Down 2</a></li>
+                            <li><a href="#">Drop Down 3</a></li>
+                            <li><a href="#">Drop Down 4</a></li>
+                        </ul>
+                    </li>
+                    {% endcomment %}
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <!-- .navbar -->
+            {% if quantity == 0 %}
+            <a href="{% url 'apply1' %}" class="get-started-btn">Get Started</a>
+            <!--  -->
+            {% else %}
+
+            <a href="{% url 'cart' %}" class="get-started-btn">
+                <i class="bi bi-cart"></i> {{quantity}}
+            </a>
+            {% endif %}
+
+        </div>
+    </header>
+    <!-- End Header -->
+    <main id="main">
+
+        <!-- ======= Breadcrumbs ======= -->
+        <div class="breadcrumbs" data-aos="fade-in">
+            <div class="container">
+                <h2>PayPal Payment</h2>
+                <p>Unfortunately, Paypal does not process payments in ZAR. Your purchase will be made in USD. </p>
+            </div>
+        </div>
+        <!-- End Breadcrumbs -->
+        <br>
+        <!-- ======= Contact Section ======= -->
+        <!-- Mail Success-->
+        <section class="mail-success section page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-3 col-12">
+                        <div class="mail-inner">
+                            <!-- <h2 style="color: #0088cc;"><span>PayPal</span> Payment</h2> -->
+                            <!-- <p style="color: #f2762e;"></p> -->
+                            <p class="text-center" id="warn">
+                                <b>
+                                    The price you will be charged by Paypal: ZAR {{total}}
+                                </b>
+                            </p>
+
+
+                            <div id="paypal-button-container"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--/ End Mail Success -->
+        <!-- End Contact Section -->
+
+    </main>
+
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>MyTuta</h3>
+                        <p>
+                            A108 Church Street <br> Pretoria, 0001<br> South Africa <br><br>
+                            <strong>Phone:</strong> +27 78 373 2701<br>
+                            <strong>Email:</strong> info@mytuta.co.za<br>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'home' %}">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'home' %}">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'home' %}">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'home' %}">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'about' %}">Training</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'about' %}">Tutoring</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'about' %}">Coaching</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'about' %}">More</a></li>
+                            <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> -->
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Join Our Newsletter</h4>
+                        <p>Subscribe for updates</p>
+                        <form action="{% url 'subscribe' %}" method="post">
+                            {% csrf_token %}
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container d-md-flex py-4">
+
+            <div class="me-md-auto text-center text-md-start">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>Stemgon</span></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                    <!-- All the links in the footer should remain intact. -->
+                    <!-- You can delete the links only if you purchased the pro version. -->
+                    <!-- Licensing information: https://stemgon.com/license/ -->
+                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://stemgon.com/mentor-free-education-bootstrap-theme/ -->
+                    Designed by <a href="https://stemgon.com/">Stemgon</a>
+                </div>
+            </div>
+            <div class="social-links text-center text-md-right pt-3 pt-md-0">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <!-- Include the PayPal JavaScript SDK SANDBOX -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AQAu7lZdmLpTo2u2hxBCl4x6bf7eJ0a5VTbPy_2JXIWVwu5iUDW5mtgok15ei9DBzhGclZWg_ByV4NAi&currency=USD&debug=true"></script>
+    <!-- <script src="https://www.paypal.com/sdk/js?client-id=AQAu7lZdmLpTo2u2hxBCl4x6bf7eJ0a5VTbPy_2JXIWVwu5iUDW5mtgok15ei9DBzhGclZWg_ByV4NAi&currency=USD"></script> -->
+
+    <!-- <script src="https://www.paypal.com/sdk/js?client-id=AQAu7lZdmLpTo2u2hxBCl4x6bf7eJ0a5VTbPy_2JXIWVwu5iUDW5mtgok15ei9DBzhGclZWg_ByV4NAi&currency=USD"></script> -->-->
+    <!-- <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+        <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&components=YOUR_COMPONENTS"></script>
+
+    Deployment -->
+
+    <!-- <script src="https://www.paypal.com/sdk/js?client-id=AQAu7lZdmLpTo2u2hxBCl4x6bf7eJ0a5VTbPy_2JXIWVwu5iUDW5mtgok15ei9DBzhGclZWg_ByV4NAi&currency=USD"></script> -->
+
+
+    <!--  -->
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <!--  -->
+    {% if messages %}
+
+    <script>
+        var isSuccess = "{% for message in messages%}{% if message.tags == 'alert-success' %}true{% endif %}{% endfor %}";
+        var isError = "{% for message in messages%}{% if message.tags == 'alert-danger' %}true{% endif %}{% endfor %}";
+        var isWarning = "{% for message in messages%}{% if message.tags == 'alert-warning' %}true{% endif %}{% endfor %}";
+        alertify.set('notifier', 'position', 'top-right');
+
+        if (isError) {
+
+            alertify.error("{% for message in messages%}{% if message.tags == 'alert-danger' %}{{message}}\n{% endif %}{% endfor %}");
+        }
+        if (isSuccess) {
+
+            alertify.success("{% for message in messages%}{% if message.tags == 'alert-success' %}{{message}}\n{% endif %}{% endfor %}");
+        }
+        if (isWarning) {
+
+            alertify.warning("{% for message in messages%}{% if message.tags == 'alert-warning' %}{{message}}\n{% endif %}{% endfor %}");
+        }
+    </script>
+    {% endif %}
+
+    <!-- <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script> -->
+
+
+
+    <script>
+        var user = '{{request.user}}';
+        var url_send_data_s = "{% url 'subscribe' %}";
+
+        var x = document.getElementById("warn");
+        x.style.color = "blue";
+
+        function changeColor() {
+            x.style.color = x.style.color == "blue" ? "orange" : "blue";
+        }
+
+        window.setInterval(changeColor, 1000);
+
+
+        function getCookie(name) {
+            let csrftoken = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        csrftoken = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return csrftoken;
+        }
+
+        var url_send_data = "{% url 'ppaypal' %}";
+        var csrftoken = getCookie('csrftoken');
+        var order_number = "{{order.order_number}}";
+        var payment_method = '{{order.payment_method}}';
+        var redirect_url = `{% url 'done' %}`;
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+            // Sets up the transaction when a payment button is clicked
+            createOrder: (data, actions) => {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: ('{{total_cost_in_dollars}}') // Can also reference a variable or function
+                        }
+                    }]
+                });
+            },
+            // Finalize the transaction after payer approval
+            onApprove: (data, actions) => {
+                return actions.order.capture().then(function(orderData) {
+                    // Successful capture! For dev/demo purposes:
+                    // alertMessage();
+                    sendData();
+
+                    function sendData() {
+                        fetch(url_send_data, {
+                                method: "POST",
+                                // credentials: 'same-origin', // include, *same-origin, omit
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRFToken': csrftoken,
+
+                                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                                },
+                                body: JSON.stringify({
+                                    orderID: order_number,
+                                    transactionID: orderData.id,
+                                    payment_method: payment_method,
+                                    status: orderData.status,
+                                    total: '{{total_cost_in_dollars}}',
+
+                                }),
+                            })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                // console.log(data);
+                                // alert(data.message);
+                                alertify.set('notifier', 'position', 'top-right');
+                                alertify.success(data.message);
+                                window.location.href = redirect_url;
+                                const element = document.getElementById('paypal-button-container');
+                                element.innerHTML = '<h3 class="text-center success">Thank you for your payment!</h3>';
+                            });
+                    }
+
+                    // console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    // const transaction = orderData.purchase_units[0].payments.captures[0];
+                    // alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+                    // When ready to go live, remove the alert and show a success message within this page. For example:
+                    // const element = document.getElementById('paypal-button-container');
+                    // element.innerHTML = '<h3 class="text-center success">Thank you for your payment!</h3>';
+                    // // Or go to another URL:  actions.redirect('thank_you.html');
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
+
+
+</body>
+
+</html>

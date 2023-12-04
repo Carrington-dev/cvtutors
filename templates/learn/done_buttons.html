@@ -1,0 +1,11 @@
+{% if is_enrolled %}
+<div class=" align-items-center">
+    <a href="{% url 'complete_module' module.id %}" class="get-started-btn" id="enroll">Cancel done</a>
+</div>
+<!--  -->
+{% else %}
+<div class=" align-items-center">
+    <a href="{% url 'complete_module' module.id %}" class="get-started-btn" id="enroll">Mark as done</a>
+</div>
+<!--  -->
+{% endif %}

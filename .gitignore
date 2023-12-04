@@ -1,0 +1,4 @@
+.env
+./senv
+db.sqlite3
+std

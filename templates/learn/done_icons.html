@@ -1,0 +1,9 @@
+ {% if is_enrolled %}
+
+<span data-id="{{module.id}}" class="like_un_like"><i class="bi bi-check-circle-fill"></i></span>
+<!--  -->
+{% else %}
+
+<span data-id="{{module.id}}" class="like_un_like"><i class="bi bi-circle"></i></span>
+<!--  -->
+{% endif %}

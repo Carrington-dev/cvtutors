@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+<!--  -->
+{% load static %}
+<!--  -->
+
+
+<!--  -->
+{% block content %}
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+        <div class="container">
+            <h2>Getting Started</h2>
+            <p>You are about to make a payment of ZAR {{total}} </p>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+
+
+
+
+        <div class="container" data-aos="fade-up">
+
+            <div class="row mt-5">
+                <div class="col-lg-3">
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0">
+                    <form id="payment-form" action="" class="php-email-form" enctype="multipart/form-data" method="POST">
+                        <!-- {% csrf_token %} {% url 'yoco' %} -->
+                        {% csrf_token %}
+                        <!-- classes in square brackets will be allied based on field and form state -->
+
+                        <!-- formstart -->
+                        <div class="one-liner">
+                            <div id="card-frame">
+                                <!-- Yoco Inline form will be added here -->
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <button id="pay-button" type="submit">PAY ZAR {{total}}</button>
+                            </div>
+
+                        </div>
+                        <p class="success-payment-message" />
+                    </form>
+                    {% comment %}
+
+                    <form action="{% url 'apply1' %}" method="post" role="form" enctype="multipart/form-data" class="php-email-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                {{form.email}}
+                                <!-- <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required> -->
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                {{form.first_name}}
+                                <!-- <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required> -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                {{form.last_name}}
+                                <!-- <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required> -->
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                {{form.country}}
+                                <!-- <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required> -->
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <!-- {{form.last_name}} -->
+                            <!-- <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required> -->
+                        </div>
+                        <div class="form-group mt-3">
+                            <!-- {{form.country}} -->
+                            <!-- <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea> -->
+                        </div>
+
+                        {% if messages %}
+
+
+                        <div class="my-3">
+                            <div class="loading">Loading</div>
+                            <div class="error-message"></div>
+                            {% for message in messages %}
+                            <div class="sent-message">Your message has been sent. Thank you!</div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <!-- <div class="text-center"><button type="submit">Send Message</button></div> -->
+                    </form>
+                    {% endcomment %}
+
+                </div>
+                <div class="col-lg-3">
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- End Contact Section -->
+
+</main>
+
+<!--  -->
+{% endblock content %}
+<!--  -->

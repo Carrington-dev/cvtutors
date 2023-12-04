@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% load my_auth_tags %}
+<!--  -->
+{% block content %}
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+        <div class="container">
+            <h2>{{course.name}}</h2>
+            {% if course.motivation != None %}
+
+            <p>{{course.motivation}}</p>
+            {% else %}
+            <p>Increase Your {{course.name}} Skills – Highly Valued And Sought After By Employers</p>
+
+            {% endif %}
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <!-- ======= Cource Details Section ======= -->
+    <section id="course-details" class="course-details">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <img src="{{course.image.url}}" class="img-fluid" alt="">
+                    <!-- <img src="{% static 'img/course-details.jpg' %}" class="img-fluid" alt=""> -->
+                    <h3>{{course.name}}</h3>
+                    <p>
+                        {{course.describe}}
+                    </p>
+                </div>
+                <div class="col-lg-4">
+
+                    <div class="course-info d-flex justify-content-between align-items-center">
+                        <h5>Trainer</h5>
+                        <p><a href="#">Walter White</a></p>
+                    </div>
+
+                    <div class="course-info d-flex justify-content-between align-items-center">
+                        <h5>Course Fee</h5>
+                        <p>ZAR {{course.price}}</p>
+                    </div>
+
+                    <div class="course-info d-flex justify-content-between align-items-center">
+                        <h5>Available Seats</h5>
+                        <p>Unlimited</p>
+                    </div>
+
+                    <div class="course-info d-flex justify-content-between align-items-center">
+                        <h5>Schedule</h5>
+                        <p>Anytime</p>
+                    </div>
+
+                    <div class=" align-items-center">
+                        <a href="{% url 'add_cart_course' course.id %}" class="get-started-btn" id="enroll">Enroll Now</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- End Cource Details Section -->
+
+    <!-- ======= Cource Details Tabs Section ======= -->
+    {% if course.modules.all %}
+
+    <section id="cource-details-tabs" class="cource-details-tabs">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <ul class="nav nav-tabs flex-column">
+                        {% for module in course.modules.all %}
+                        <!--  -->
+                        {% if molule.id == course.first_module.id %}
+                        <!--  -->
+                        <li class="nav-item tab-pane active show">
+                            <a class="nav-link tabs" data-tg="tab-{{module.id}}" data-bs-toggle="tab" href="#tab-{{module.id}}">{{module.title|truncatechars:"20"}}</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link tabs" data-tg="tab-{{module.id}}" data-bs-toggle="tab" href="#tab-{{module.id}}">{{module.title|truncatechars:"20"}}</a>
+                        </li>
+                        {% endif %} {% endfor %}
+
+                    </ul>
+                </div>
+                <div class="col-lg-9 mt-4 mt-lg-0">
+                    <div class="tab-content">
+                        {% for module in course.modules.all %} {% if module == course.module.first %}
+
+                        <div class="tab-pane active show" id="tab-{{module.id}}">
+                            <div class="row">
+                                <div class="col-lg-8 details order-2 order-lg-1">
+                                    <h3>{{module.title}}</h3>
+                                    <p class="fst-italic">{{course.name}}</p>
+                                    <p>{{module.description}}</p>
+                                </div>
+                                <div class="col-lg-4 text-center order-1 order-lg-2">
+                                    <img src="{% static 'img/course-details-tab-1.png' %}" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="tab-pane" id="tab-{{module.id}}">
+                            <div class="row">
+                                <div class="col-lg-8 details order-2 order-lg-1">
+                                    <h3>{{module.title}}</h3>
+                                    <p class="fst-italic">{{course.name}}</p>
+                                    <p>{{module.description}}</p>
+                                </div>
+                                <div class="col-lg-4 text-center order-1 order-lg-2">
+                                    <img src="{{module.image.url}}" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-3">
+                            <div class="row">
+                                <div class="col-lg-8 details order-2 order-lg-1">
+                                    <h3>Impedit facilis occaecati odio neque aperiam sit</h3>
+                                    <p class="fst-italic">Eos voluptatibus quo. Odio similique illum id quidem non enim fuga. Qui natus non sunt dicta dolor et. In asperiores velit quaerat perferendis aut</p>
+                                    <p>Iure officiis odit rerum. Harum sequi eum illum corrupti culpa veritatis quisquam. Neque necessitatibus illo rerum eum ut. Commodi ipsam minima molestiae sed laboriosam a iste odio. Earum odit nesciunt fugiat sit ullam.
+                                        Soluta et harum voluptatem optio quae</p>
+                                </div>
+                                <div class="col-lg-4 text-center order-1 order-lg-2">
+                                    <img src="{% static 'img/course-details-tab-3.png' %}" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %} {% comment %}
+
+                        <div class="tab-pane" id="tab-4">
+                            <div class="row">
+                                <div class="col-lg-8 details order-2 order-lg-1">
+                                    <h3>Fuga dolores inventore laboriosam ut est accusamus laboriosam dolore</h3>
+                                    <p class="fst-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis delectus</p>
+                                    <p>Eaque consequuntur consequuntur libero expedita in voluptas. Nostrum ipsam necessitatibus aliquam fugiat debitis quis velit. Eum ex maxime error in consequatur corporis atque. Eligendi asperiores sed qui veritatis aperiam
+                                        quia a laborum inventore</p>
+                                </div>
+                                <div class="col-lg-4 text-center order-1 order-lg-2">
+                                    <img src="{% static 'img/course-details-tab-4.png' %}" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-5">
+                            <div class="row">
+                                <div class="col-lg-8 details order-2 order-lg-1">
+                                    <h3>Est eveniet ipsam sindera pad rone matrelat sando reda</h3>
+                                    <p class="fst-italic">Omnis blanditiis saepe eos autem qui sunt debitis porro quia.</p>
+                                    <p>Exercitationem nostrum omnis. Ut reiciendis repudiandae minus. Omnis recusandae ut non quam ut quod eius qui. Ipsum quia odit vero atque qui quibusdam amet. Occaecati sed est sint aut vitae molestiae voluptate vel</p>
+                                </div>
+                                <div class="col-lg-4 text-center order-1 order-lg-2">
+                                    <img src="{% static 'img/course-details-tab-2.png' %}" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                        {% endcomment %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    {% endif %}
+    <!-- End Cource Details Tabs Section -->
+
+    {% show_recommened_courses course.id %}
+
+</main>
+<!-- End #main -->
+
+{% endblock content %} {% block jstags %}
+<!--  -->
+<script src="{% static 'js/course.js' %}"></script>
+{% endblock jstags %}

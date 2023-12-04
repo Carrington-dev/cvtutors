@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+<!--  -->
+{% load static %}
+<!--  -->
+<!--  -->
+{% load learn_tags %}
+<!--  -->
+{% block content %}
+<!--  -->
+
+
+<main id="main" data-aos="fade-in">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <h2>My learning </h2>
+            {% if courses %}
+            <!--  -->
+            <p>Make sure you complete all the modules in a course to get the certificate</p>
+            {% else %}
+            <p>You have haven't enrolled in any course yet.</p>
+            <!--  -->
+            {% endif %}
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+
+    <!-- ======= Courses Section ======= -->
+    {% if courses %}
+    <section id="courses" class="courses">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row" data-aos="zoom-in" data-aos-delay="100">
+
+                <!--  -->
+
+                {% for course in courses %}
+
+                <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                    <div class="course-item">
+                        <img src="{{course.image.url}}" class="img-fluid" alt="...">
+                        <div class="course-content">
+                            <!--  -->
+                            {% is_enrolled_in course.id %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <!--  -->
+
+                <!-- End Course Item-->
+
+
+
+            </div>
+            <div class="row m-1 my-2" data-aos="zoom-in" data-aos-delay="100">
+
+                <div class="col-md-1 text-center"></div>
+                <div class="col-md-10 text-center">
+                    {% if is_paginated %}
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                            <li class="page-item">
+
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <!-- <span class="sr-only">Previous</span> -->
+                                </a>
+                            </li>
+
+                            {% endif %}
+                            <!--  -->
+                            {% for i in paginator.get_elided_page_range %}
+                            <!--  -->
+                            {% if page_obj.number == i %}
+                            <li class="active"><a class="page-link active" href="?page={{ i }}">{{ i }}</a>
+                            </li>
+                            {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                            <!--  -->
+                            {% endfor %}
+                            <!--  -->
+                            {% if page_obj.has_next %}
+                            <li><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                            <!-- <li class="disabled"><span>&raquo;</span></li> -->
+                            {% endif %}
+                        </ul>
+                    </nav>
+
+                    {% endif %}
+                </div>
+                <div class="col-md-1 text-center"></div>
+
+            </div>
+
+        </div>
+    </section>
+    {% endif %}
+    <!-- End Courses Section -->
+
+</main>
+<!-- End #main -->
+
+
+{% endblock content %}

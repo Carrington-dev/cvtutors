@@ -1,0 +1,70 @@
+<div class="info">
+    <div class="address">
+        <img src="{{user.profile.image.url}}" alt="{{user.username}}">
+    </div>
+    <br>
+    <div class="address">
+        <i class="bi bi-person"></i>
+        <h4>Full Name:</h4>
+        {% if user.first_name %}
+
+        <p>{{user.first_name}} {{user.last_name}} </p>
+        {% else %}
+        <p>Update User </p>
+        {% endif %}
+    </div>
+    <br>
+    <div class="address">
+        <i class="bi bi-stars"></i>
+        <h4>Status:</h4>
+        <p>{{user.profile.occupation}}</p>
+    </div>
+    <br>
+    <div class="address">
+        <i class="bi bi-geo-alt"></i>
+        <h4>Username:</h4>
+        {% if user.username %}
+
+        <p>{{user.username}} </p>
+        {% else %}
+        <p>MyTuta User </p>
+        {% endif %}
+    </div>
+
+    <div class="email">
+        <i class="bi bi-envelope"></i>
+        <h4>Email:</h4>
+        <p>{{user.email}}</p>
+    </div>
+    <br>
+    <div class="email">
+        <i class="bi bi-check"></i>
+        <h4>Bio:</h4>
+        <p>{{user.profile.bio|slice:'20'}}</p>
+    </div>
+    <div class="email">
+        <i class="bi bi-cart"></i>
+        <h4>Orders:</h4>
+        <a href="{% url 'my_customer_orders' %}">View Orders</a>
+    </div>
+
+    <div class="phone">
+        <i class="bi bi-phone"></i>
+        <h4>Call:</h4>
+
+        {% if user.phone %}
+
+        <p>{{user.phone}}</p>
+        {% else %}
+        <p>Update your contact details</p>
+        {% endif %}
+
+    </div>
+    <div class="phone">
+        <i class="bi bi-person-rolodex"></i>
+        <h4>Password:</h4>
+        <div><a href="{% url 'password_change' %}" class="">Change password</a></div>
+
+    </div>
+
+</div>

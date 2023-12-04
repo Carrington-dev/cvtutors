@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  webapp-service:
+    build: 
+      context: .
+      dockerfile: .
+    # volumes:
+    #   - ./webapp: .
+    ports: ["8000:8000"]

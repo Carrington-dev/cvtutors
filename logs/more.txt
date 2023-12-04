@@ -1,0 +1,7 @@
+https://mdbootstrap.com/freebies/emails/
+
+
+Reset Password
+If we found an eligible account associated with that username, we've sent password reset instructions to the primary email address on the account.
+
+Still having trouble logging in? Contact Support.

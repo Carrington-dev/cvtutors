@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load my_auth_tags %}
+<!--  -->
+{% load static %}
+<!--  -->
+
+<head>
+    <meta charset="utf-8"> {% block tags %} {% endblock tags %}
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!--  -->
+    {% if title%}
+    <title>{{title}} | {{ company }}</title>
+    {% else %}
+    <title>{{ company }}</title>
+    {% endif %}
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'img/favicon.png' %}" rel="icon">
+    <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <script src="https://js.yoco.com/sdk/v1/yoco-sdk-web.js"></script>
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css">
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <!-- =======================================================
+  * Template Name: Education - v4.8.1
+  * Template URL: https://stemgon.co.za/
+  * Author: stemgon.co.za
+  * License: https://stemgon.co.za/license/
+  ======================================================== -->
+    <style>
+        #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
+        
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        
+        @-webkit-keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+        
+        @-webkit-keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+        /* $shopping-cart-red: #DF0000; */
+        /* $shopping-cart-red: #DF0000; */
+        
+        .icon-button {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            color: #333333;
+            background: #fff;
+            border: none;
+            outline: none;
+            border-radius: 50%;
+        }
+        
+        .icon-button:hover {
+            cursor: pointer;
+        }
+        
+        .icon-button:active {
+            background: #fff;
+        }
+        
+        .icon-button__badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 25px;
+            height: 25px;
+            background: red;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
+        
+        .badge:after {
+            content: attr(value);
+            font-size: 12px;
+            color: #ffffff;
+            background: red;
+            border-radius: 50%;
+            padding: 0 5px;
+            position: relative;
+            left: -8px;
+            top: -10px;
+            opacity: 0.9;
+        }
+        /* .cart_s {
+            background-color: transparent;
+            border-radius: 50%;
+            margin-left: 10px;
+        } */
+    </style>
+
+    {% block scripts %}
+    <!--  -->
+    {% endblock scripts %}
+
+
+</head>
+
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+
+            <!-- <h1 class="logo me-auto"><a href="{% url 'home' %}">FlexyTuta</a></h1> -->
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <a href="{% url 'home' %}" class="logo me-auto"><img src="{% static 'img/logo.png' %}" alt="" class="img-fluid"></a>
+
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                    <li><a class="active" href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'courses' %}">Courses</a></li>
+                    <li><a href="{% url 'my_courses' %}">My Learning</a></li>
+                    <!-- <li><a href="{% url 'tutors' %}">Tutas</a></li> -->
+                    <!-- <li><a href="{% url 'home' %}">Events</a></li> -->
+                    <li><a href="{% url 'pricing' %}">Pricing</a></li>
+
+                    {% if user.is_authenticated %}
+
+                    <!-- <li><a href="{% url 'logout' %}">Sign Out</a></li> -->
+
+                    <li class="dropdown"><a><span>More</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="{% url 'logout' %}">Sign Out</a></li>
+                            {% if user.is_admin %}
+                            <!--  -->
+                            {% if not user.is_teacher %}
+
+                            <li><a href="{% url 'admin:index' %}">Power</a></li>
+                            {% endif %}
+                            <!--  -->
+                            {% endif %}
+
+                            <li><a href="{% url 'profile' %}">Profile</a></li>
+                            <li><a href="{% url 'likes' %}">My WishList</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+
+                    <!-- <li><a>Sign Up</a></li> -->
+                    <li class="dropdown"><a href="#"><span>Sign Up</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="{% url 'register' %}">As a student</a></li>
+
+                            <li><a href="{% url 'tutor_register' %}">As a tutor</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{% url 'login' %}">Sign In</a></li>
+                    {% endif %} {% comment %}
+                    <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#">Drop Down 1</a></li>
+                            <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="#">Deep Drop Down 1</a></li>
+                                    <li><a href="#">Deep Drop Down 2</a></li>
+                                    <li><a href="#">Deep Drop Down 3</a></li>
+                                    <li><a href="#">Deep Drop Down 4</a></li>
+                                    <li><a href="#">Deep Drop Down 5</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Drop Down 2</a></li>
+                            <li><a href="#">Drop Down 3</a></li>
+                            <li><a href="#">Drop Down 4</a></li>
+                        </ul>
+                    </li>
+                    {% endcomment %}
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+            <!-- .navbar -->
+            {% if quantity == 0 %}
+            <a href="{% url 'apply1' %}" class="get-started-btn">Get Started</a>
+            <!--  -->
+            {% else %}
+
+            <a href="{% url 'cart' %}" class="get-started-btn">
+                <!-- <i class="bi bi-cart"></i> {{quantity}} -->
+                <span class="cart_s">
+
+                    <i class="fa badge fa-lg" value=" {{quantity}}">&#xf07a;</i>
+                </span>
+
+            </a>
+            {% endif %}
+
+        </div>
+    </header>
+    <!-- End Header -->
+
+    {% block content %} {% endblock content %}
+
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>{{ company }}</h3>
+                        <p>
+                            395 Francis Baard Street <br> Pretoria, 0001<br> South Africa <br><br>
+                            <strong>Phone:</strong> +27 67 735 2242<br>
+                            <strong>Email:</strong> info@cvacademy.co.za<br>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'about' %}">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'courses' %}">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'courses' %}">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'courses' %}">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'courses' %}">Training</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'apply1' %}">Tutoring</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'apply1' %}">Coaching</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="{% url 'about' %}">More</a></li>
+                            <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li> -->
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Join Our Newsletter</h4>
+                        <p>Subscribe for updates</p>
+                        <form action="{% url 'subscribe' %}" method="post">
+                            {% csrf_token %}
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container d-md-flex py-4">
+
+            <div class="me-md-auto text-center text-md-start">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>Stemgon</span></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                    <!-- All the links in the footer should remain intact. -->
+                    <!-- You can delete the links only if you purchased the pro version. -->
+                    <!-- Licensing information: https://stemgon.co.za/license/ -->
+                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://stemgon.co.za/mentor-free-education-bootstrap-theme/ -->
+                    <!-- Designed by <a href="https://stemgon.co.za/">Stemgon</a> -->
+                </div>
+            </div>
+            <div class="social-links text-center text-md-right pt-3 pt-md-0">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    {% block jstags %}
+    <!--  -->
+    {% endblock jstags %}
+
+
+    <!--  -->
+    {% if messages %}
+
+    <script>
+        var isSuccess = "{% for message in messages%}{% if message.tags == 'alert-success' %}true{% endif %}{% endfor %}";
+        var isError = "{% for message in messages%}{% if message.tags == 'alert-danger' %}true{% endif %}{% endfor %}";
+        var isWarning = "{% for message in messages%}{% if message.tags == 'alert-warning' %}true{% endif %}{% endfor %}";
+        alertify.set('notifier', 'position', 'top-right');
+
+        if (isError) {
+
+            alertify.error("{% for message in messages%}{% if message.tags == 'alert-danger' %}{{message}}\n{% endif %}{% endfor %}");
+        }
+        if (isSuccess) {
+
+            alertify.success("{% for message in messages%}{% if message.tags == 'alert-success' %}{{message}}\n{% endif %}{% endfor %}");
+        }
+        if (isWarning) {
+
+            alertify.warning("{% for message in messages%}{% if message.tags == 'alert-warning' %}{{message}}\n{% endif %}{% endfor %}");
+        }
+    </script>
+    {% endif %}
+    <script>
+        // Replace the supplied `publicKey` with your own.
+        // Ensure that in production you use a production public_key.
+        var sdk = new window.YocoSDK({
+            publicKey: 'pk_test_6ca1fd14dVLoJZB28144'
+        });
+
+        // Create a new dropin form instance
+        var inline = sdk.inline({
+            layout: 'basic',
+            amountInCents: '{{total}}',
+            currency: 'ZAR'
+        });
+        // this ID matches the id of the element we created earlier.
+        inline.mount('#card-frame');
+    </script>
+    <script>
+        // Run our code when your form is submitted
+        var form = document.getElementById('payment-form');
+        var submitButton = document.getElementById('pay-button');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault()
+                // Disable the button to prevent multiple clicks while processing
+            submitButton.disabled = true;
+            // This is the inline object we created earlier with the sdk
+            inline.createToken().then(function(result) {
+                // Re-enable button now that request is complete
+                // (i.e. on success, on error and when auth is cancelled)
+                submitButton.disabled = false;
+                if (result.error) {
+                    const errorMessage = result.error.message;
+                    errorMessage && alert("error occured: " + errorMessage);
+                } else {
+                    const token = result;
+                    // sendMessage(token);
+                    sendMessageStr(token);
+                    alert("card successfully tokenised: " + token.id);
+                }
+            }).catch(function(error) {
+                // Re-enable button now that request is complete
+                submitButton.disabled = false;
+                alert("error occured: " + error);
+            });
+        });
+        // Any additional form data you want to submit to your backend should be done here, or in another event listener
+    </script>
+    <script>
+        var redirect_url = `{% url 'done' %}`;
+
+        function getCookie(name) {
+            let csrftoken = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        csrftoken = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return csrftoken;
+        }
+        var csrftoken = getCookie('csrftoken');
+        const sendMessageStr = (token) => {
+            // const data = {
+            //     token: token
+            // };
+            amount = '{{total}}' * 100;
+
+            fetch('https://online.yoco.com/v1/charges/', {
+                    method: 'POST', // or 'PUT'
+                    headers: {
+                        'X-Auth-Secret-Key': 'sk_test_35427c4aM1pJYkP9c094e12b38fa',
+                    },
+                    body: JSON.stringify({
+
+                        token: token.id,
+                        amountInCents: amount,
+                        currency: 'ZAR',
+                    }),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    // console.log('Success:', data);
+                    alert(data);
+                    window.location.href = redirect_url;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
+        const sendMessage = (token) => {
+            // const data = {
+            //     token: token
+            // };
+            amount = '{{total}}' * 100;
+
+            fetch(`{% url 'yoco_payment' %}`, {
+                    method: 'POST', // or 'PUT'
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrftoken,
+                    },
+                    body: JSON.stringify({
+
+                        tokens: token.id,
+                        amountInCents: amount,
+                    }),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    // console.log('Success:', data);
+                    alert(data);
+                    window.location.href = redirect_url;
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+
+    <!-- <script>
+        $(function() {
+            var availableTags = [
+                "{% for t in cities %}{{t}},{% endfor %}"
+                // "technology", "science",
+            ];
+            $("#city_in").autocomplete({
+                source: availableTags
+            });
+        });
+    </script> -->
+
+</body>
+
+</html>
